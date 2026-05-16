@@ -136,7 +136,7 @@ function App() {
       setMode('view');
       setShowPasswordDialog(false);
       setPendingAction(null);
-      showToast('Loaded from URL – never stored.', 'info');
+      showToast('Loaded from URL.', 'info');
     } catch (err) {
       showToast('Wrong password.');
     }
