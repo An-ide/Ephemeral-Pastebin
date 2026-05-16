@@ -66,6 +66,7 @@ function App() {
       } else {
         setDecryptedText(finalData);
         setMode('view');
+        showToast('Loaded from URL – never stored.', 'info');
       }
     } catch (err) {
       showToast('Invalid or corrupted paste');
@@ -135,6 +136,7 @@ function App() {
       setMode('view');
       setShowPasswordDialog(false);
       setPendingAction(null);
+      showToast('Loaded from URL – never stored.', 'info');
     } catch (err) {
       showToast('Wrong password.');
     }
@@ -238,7 +240,7 @@ function App() {
 
           {mode === 'view' && !expired && decryptedText && (
             <>
-              <div className="alert alert-info"><img src={ICONS.viewPaste} className="icon" alt="" /> Loaded from URL – never stored.</div>
+              {/* Removed the ugly alert-info box */}
               <textarea className="paste-input" readOnly value={decryptedText} />
               <div className="btn-group">
                 <button className="btn btn-secondary" onClick={newPaste}>Create new paste</button>
@@ -302,7 +304,7 @@ function App() {
 
       {toast && (
         <div className="toast">
-          {toast.type === 'error' ? '⚠️ ' : '✓ '}
+          {toast.type === 'error' ? '⚠️ ' : toast.type === 'info' ? '📋 ' : '✓ '}
           {toast.message}
         </div>
       )}
